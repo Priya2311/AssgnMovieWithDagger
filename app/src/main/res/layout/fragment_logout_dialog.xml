@@ -1,0 +1,37 @@
+<layout>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/rounded_rect_white_less"
+    android:minHeight="@dimen/dp150"
+    android:minWidth="@dimen/dp300"
+    android:layout_margin="@dimen/dp12"
+    android:orientation="vertical"
+    tools:context="com.globalfitness.ui.dialog.OkDialogFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/dp40"
+        android:text="@string/logout_msg"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_size_16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/btn_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/rounded_rect_green"
+        android:gravity="center"
+        android:minHeight="@dimen/dp40"
+        android:text="@string/ok"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size_16sp" />
+
+</FrameLayout>
+</layout>

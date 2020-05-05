@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">IMDB Movies</string>
+    <string name="please_wait">Please Wait...</string>
+    <string name="no_network_msg">No network available</string>
+    <string name="retry">Retry</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="server_error">Server error occured</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_data_available">No Data Available</string>
+    <string name="logout">Logout</string>
+    <string name="login">Login</string>
+    <string name="login_to_imdb">Login To IMDB to see the movie listing and details</string>
+    <string name="please_email_address">Please enter your email address..</string>
+    <string name="email">Email Id</string>
+    <string name="password">Password</string>
+    <string name="please_enter_password">Please enter your 4 digit password..</string>
+    <string name="please_email_vaild">Please enter a valid email address</string>
+    <string name="enter_4_digit_password">Please enter a password with minimum 4 digits</string>
+    <string name="logout_msg">Do you want to logout?</string>
+    <string name="movie_id">movie_id</string>
+    <string name="original_language">Original Language</string>
+</resources>
