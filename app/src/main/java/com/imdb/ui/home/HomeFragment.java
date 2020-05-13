@@ -1,6 +1,7 @@
 package com.imdb.ui.home;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,16 +32,30 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends BaseFragment implements OnPosterClick {
-
+    @Inject
+    HomeViewModel homeViewModel;
     private FragmentHomeBinding fragmentHomeBinding;
-    private HomeViewModel homeViewModel;
+    //private HomeViewModel homeViewModel;
     HomeAdapter mAdapter;
     private List<HomeResponse.ResultsBean> mMovieData = new ArrayList<HomeResponse.ResultsBean>();
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // Obtaining the login graph from LoginActivity and instantiate
+        // the @Inject fields with objects from the graph
+        ((HomeActivity) getActivity()).homeComponent.inject(this);
+
+        // Now you can access loginViewModel here and onCreateView too
+        // (shared instance with the Activity and the other Fragment)
+    }
 
     public HomeFragment() {
     }
@@ -61,7 +76,7 @@ public class HomeFragment extends BaseFragment implements OnPosterClick {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        //homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         mAdapter = new HomeAdapter(getContext(), mMovieData);
         fragmentHomeBinding.movieRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         fragmentHomeBinding.movieRecycler.setAdapter(mAdapter);

@@ -14,6 +14,7 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
 
+import dagger.Module;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -23,6 +24,7 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@Module
 public class AppRetrofit {
 
     private static AppRetrofit instance;
@@ -46,7 +48,7 @@ public class AppRetrofit {
         return instance;
     }
 
-    private AppRetrofit() {
+    public AppRetrofit() {
         appService = provideService();
     }
 

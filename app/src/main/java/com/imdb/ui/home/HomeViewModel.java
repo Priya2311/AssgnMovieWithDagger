@@ -13,15 +13,18 @@ import com.imdb.vo.Resource;
 
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 public class HomeViewModel extends ViewModel {
 
     final MutableLiveData<HomeRequest> movieReq = new MutableLiveData<>();
     private LiveData<Resource<HomeResponse>> movieResp;
 
-    private HomeRepositry homeRepositry;
+    //private HomeRepositry homeRepositry;
 
-    public HomeViewModel() {
-        homeRepositry = new HomeRepositry();
+    @Inject
+    public HomeViewModel(HomeRepositry homeRepositry) {
+       // homeRepositry = new HomeRepositry();
         movieResp = Transformations.switchMap(movieReq, new Function<HomeRequest, LiveData<Resource<HomeResponse>>>() {
             @Override
             public LiveData<Resource<HomeResponse>> apply(HomeRequest req) {

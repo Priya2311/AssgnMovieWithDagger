@@ -10,12 +10,16 @@ import com.imdb.api.AppRetrofit;
 import com.imdb.repository.NetworkBoundWtDbRes;
 import com.imdb.vo.Resource;
 
+import javax.inject.Inject;
+
 public class HomeRepositry {
 
     private final AppExecutors appExecutors;
 
-    HomeRepositry() {
-        this.appExecutors = new AppExecutors();
+    @Inject
+    HomeRepositry(AppExecutors appExecutors) {
+        //  this.appExecutors = new AppExecutors();
+        this.appExecutors = appExecutors;
     }
 
     LiveData<Resource<HomeResponse>> getMovies(final HomeRequest req) {

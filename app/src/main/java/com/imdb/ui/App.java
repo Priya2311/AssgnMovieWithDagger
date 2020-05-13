@@ -8,18 +8,24 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.view.View;
 
+import com.imdb.AppComponent;
+import com.imdb.AppModule;
+import com.imdb.DaggerAppComponent;
+import com.imdb.api.AppRetrofit;
 import com.imdb.utility.AppUtils;
 import com.imdb.utility.DialogUtil;
 import com.imdb.utility.Lg;
 
+import dagger.Module;
 
+@Module
 public class App extends Application {
 
 
     private static String TAG = App.class.getName();
     public static boolean isConnected;
     private BroadcastReceiver mNetStateChangeReceiver;
-
+    public AppComponent mAppComponent;
 
     private static App mAppInstance;
 
@@ -29,6 +35,11 @@ public class App extends Application {
         registerReceiver(getNetworkStateReceiver(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         isConnected = AppUtils.isNetworkAvailable(this);
         mAppInstance = this;
+        mAppComponent = DaggerAppComponent.builder()
+                // list of modules that are part of this component need to be created here too
+                .appModule(new AppModule(this)) // This also corresponds to the name of your module: %component_name%Module
+                .appRetrofit(new AppRetrofit())
+                .build();
     }
 
     public static boolean isConnected(View anyView, View.OnClickListener retryListener) {
@@ -44,7 +55,10 @@ public class App extends Application {
     public void onTerminate() {
         unregisterReceiver(mNetStateChangeReceiver);
         super.onTerminate();
+    }
 
+    public AppComponent getAppComponent() {
+        return mAppComponent;
     }
 
 

@@ -24,6 +24,9 @@ import androidx.annotation.NonNull;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import dagger.Module;
+import dagger.Provides;
+
 
 /**
  * Global executor pools for the whole application.
@@ -31,6 +34,8 @@ import java.util.concurrent.Executors;
  * Grouping tasks like this avoids the effects of task starvation (e.g. disk reads don't wait behind
  * webservice requests).
  */
+
+@Module
 public class AppExecutors {
 
     private final Executor diskIO;
@@ -45,8 +50,14 @@ public class AppExecutors {
         this.mainThread = mainThread;
     }
 
+
     public AppExecutors() {
         this(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3), new MainThreadExecutor());
+    }
+
+    @Provides
+    public AppExecutors AppExecutors(){
+       return new AppExecutors(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3), new MainThreadExecutor());
     }
 
     public Executor diskIO() {
