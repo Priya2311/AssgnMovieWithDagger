@@ -48,12 +48,9 @@ public class PreferenceUtil {
 
 
     public String getStringValue(String key) {
-        // if (mSpref.contains(key))
-        return mSpref.getString(key, "");
-       /* else
-            Lg.e(TAG, "KEY NOT FOUND");
 
-        return null;*/
+        return mSpref.getString(key, "");
+
     }
 
     public static SharedPreferences getDefaultSharedPrefernce(Context context) {
@@ -66,12 +63,9 @@ public class PreferenceUtil {
     }
 
     public boolean getBooleanValue(String key) {
-        //  if (mSpref.contains(key))
-        return mSpref.getBoolean(key, false);
-        /*else
-            Lg.e(TAG, "KEY NOT FOUND");
 
-        return false;*/
+        return mSpref.getBoolean(key, false);
+
     }
 
     public float getFloatValue(String key) {
@@ -188,21 +182,5 @@ public class PreferenceUtil {
         appInstallInfoEditor.apply();
 
     }
-
-    @TargetApi(Build.VERSION_CODES.KITKAT)
-    public static void logoutUser(Context context) {
-        SharedPreferences appInstallInfoSharedPref = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor appInstallInfoEditor = appInstallInfoSharedPref.edit();
-        appInstallInfoEditor.clear();
-        appInstallInfoEditor.commit();
-
-        context.deleteDatabase("webview.db");
-        context.deleteDatabase("webviewCache.db");
-
-        context.getSharedPreferences("com.pinterest.android.pdk.PREF_FILE_KEY", Context.MODE_PRIVATE).edit().clear().commit();
-
-
-    }
-
 
 }

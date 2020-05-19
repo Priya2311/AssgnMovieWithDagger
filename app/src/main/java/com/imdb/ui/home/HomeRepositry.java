@@ -4,9 +4,9 @@ package com.imdb.ui.home;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
-import com.imdb.AppExecutors;
 import com.imdb.api.ApiResponse;
 import com.imdb.api.AppRetrofit;
+import com.imdb.di.AppExecutors;
 import com.imdb.repository.NetworkBoundWtDbRes;
 import com.imdb.vo.Resource;
 
@@ -16,9 +16,9 @@ public class HomeRepositry {
 
     private final AppExecutors appExecutors;
 
+    //injected the app executer without creating its object
     @Inject
     HomeRepositry(AppExecutors appExecutors) {
-        //  this.appExecutors = new AppExecutors();
         this.appExecutors = appExecutors;
     }
 

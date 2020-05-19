@@ -24,7 +24,6 @@ import com.imdb.utility.AppConstants;
  */
 public class WebFragment extends BaseFragment {
 
-
     private FragmentWebBinding fragmentWebBinding;
     private String mImageUrl;
 
@@ -45,7 +44,6 @@ public class WebFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         fragmentWebBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_web, container, false);
         return fragmentWebBinding.getRoot();
     }

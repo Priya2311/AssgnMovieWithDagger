@@ -2,28 +2,17 @@ package com.imdb.utility;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.InputFilter;
-import android.text.Spanned;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 
 import com.google.android.material.snackbar.Snackbar;
 import com.imdb.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,21 +37,6 @@ public class ValidationHelper {
         return false;
     }
 
-    public static boolean isBlank(@NonNull TextView targetEditText) {
-        return targetEditText.getText().toString().trim().isEmpty();
-    }
-
-
-    public static boolean isBlank(@NonNull TextView textView, String msg, boolean showToast) {
-        String source = textView.getText().toString().trim();
-        if (source.isEmpty() && showToast) {
-            showToast(textView.getContext(), msg);
-            return true;
-        }
-        return false;
-    }
-
-
     /**
      * This method returns true if a edit text contains valid email ,false otherwise
      *
@@ -82,39 +56,12 @@ public class ValidationHelper {
         return false;
     }
 
-    public static boolean isEmailValid(@NonNull EditText targetEditText, String msg, boolean showToast) {
-        String source = targetEditText.getText().toString().trim();
-        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        Pattern p = Pattern.compile(expression, Pattern.CASE_INSENSITIVE); // pattern=/^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
-        Matcher m = p.matcher(source);
-        if (m.matches() && source.trim().length() > 0) {
-            return true;
-        }
-        if (showToast)
-            showAlert(targetEditText, ALERT_TYPE.TOAST, msg);
-        return false;
-    }
-
-    public static boolean isEmailValid(@NonNull EditText targetEditText) {
-        String source = targetEditText.getText().toString().trim();
-        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        Pattern p = Pattern.compile(expression, Pattern.CASE_INSENSITIVE); // pattern=/^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
-        Matcher m = p.matcher(source);
-        if (m.matches() && source.trim().length() > 0) {
-            return true;
-        }
-
-        return false;
-    }
-
 
     public static void showToast(Context context, String msg) {
         Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_LONG).show();
     }
 
-
     private static void showAlert(TextView targetEditText, ALERT_TYPE alertType, String msg) {
-        //View v = parentLayout == null ? targetEditText.getRootView() : parentLayout;
         targetEditText.requestFocus();
         if (alertType == ALERT_TYPE.TOAST) {
             showToast(targetEditText.getContext(), msg);
@@ -122,24 +69,16 @@ public class ValidationHelper {
             showSnackBar(targetEditText, msg);
         }
 
-
     }
 
 
     public static void showSnackBar(View parentLayout, String msg) {
-        //Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_LONG).show();
         final Snackbar snackBar = Snackbar.make(parentLayout, msg, Snackbar.LENGTH_SHORT);
         snackBar.setActionTextColor(Color.WHITE);
         View view = snackBar.getView();
         TextView tv = (TextView)
                 view.findViewById(R.id.snackbar_text);
         tv.setTextColor(Color.WHITE);
-       /* snackBar.setAction(R.string.dismiss, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                snackBar.dismiss();
-            }
-        });*/
         snackBar.show();
 
     }
@@ -160,16 +99,6 @@ public class ValidationHelper {
     }
 
 
-    public static boolean isValidURL(EditText mFeedEditText, ALERT_TYPE alertType, String msg) {
-
-        String url = mFeedEditText.getText().toString().toLowerCase();
-        if (Patterns.WEB_URL.matcher(url).matches()) {
-            return true;
-        } else {
-            showAlert(mFeedEditText, alertType, msg);
-            return false;
-        }
-    }
 
 
 }

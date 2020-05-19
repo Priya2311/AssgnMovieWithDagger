@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.imdb;
+package com.imdb.di;
 
 import android.os.Handler;
 import android.os.Looper;

@@ -13,4 +13,5 @@ public class AppConstants {
     public static final String POSTER_URL = "poster_url";
     public static final String LANGUAGE = "language";
     public static final String ENGLISH = "en-US";
+    public static final String MOVIE_NAME = "movie_name";
 }

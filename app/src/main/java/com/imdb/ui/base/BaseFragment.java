@@ -47,8 +47,6 @@ public class BaseFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
     }
 
 
@@ -59,7 +57,6 @@ public class BaseFragment extends DialogFragment {
     }
 
     protected void closeProgressDialog() {
-
         DialogUtil.hideProgressDialog(mProgressDialog);
     }
 

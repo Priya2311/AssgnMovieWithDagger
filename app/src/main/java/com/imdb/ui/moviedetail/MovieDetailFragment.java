@@ -17,9 +17,10 @@ import com.bumptech.glide.Glide;
 import com.imdb.R;
 import com.imdb.api.ApiConstant;
 import com.imdb.databinding.FragmentMovieDetailBinding;
-import com.imdb.ui.App;
+import com.imdb.ui.base.App;
 import com.imdb.ui.base.BaseFragment;
 import com.imdb.ui.home.HomeResponse;
+import com.imdb.ui.web.MovieWebActivity;
 import com.imdb.utility.AppConstants;
 import com.imdb.vo.Resource;
 import com.imdb.vo.Status;
@@ -29,6 +30,13 @@ import java.io.Serializable;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+// @Jerry
+// commented callMovieList() api as the movie listing api does not have movie id, it was record id. On record id, I am receiving different data.
+// so I have passed the whole data from movie listing api. Initially I was opening it in webview but now showing a bunch of data from previous
+// screen and showing the web view from this screen.
+
+
 public class MovieDetailFragment extends BaseFragment {
     private FragmentMovieDetailBinding fragmentMovieBinding;
     private int mMovieId;
@@ -60,13 +68,15 @@ public class MovieDetailFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         movieViewModel = ViewModelProviders.of(this).get(MovieDetailViewModel.class);
-        if (getArguments() != null){
+        if (getArguments() != null) {
             mMovieId = getArguments().getInt(ApiConstant.MOVIE_ID);
             mMovieData = (HomeResponse.ResultsBean) getArguments().getSerializable(ApiConstant.MOVIE_DATA);
         }
 
         setData(null);
-       // callMovieList();
+
+
+        // callMovieList();
     }
 
     private void callMovieList() {
@@ -113,11 +123,24 @@ public class MovieDetailFragment extends BaseFragment {
         fragmentMovieBinding.tvReleaseDate.setText(mMovieData.getRelease_date());
         fragmentMovieBinding.tvVoteCount.setText(String.valueOf(mMovieData.getVote_count()));
         fragmentMovieBinding.tvOverview.setText(mMovieData.getOverview());
-        fragmentMovieBinding.tvStatus.setText(getString(R.string.original_language)+" : "+mMovieData.getOriginal_language());
+        fragmentMovieBinding.tvStatus.setText(getString(R.string.original_language) + " : " + mMovieData.getOriginal_language());
+        fragmentMovieBinding.ivPoster.setOnClickListener(getMoviePosterClick(AppConstants.IMAGEURL + mMovieData.getPoster_path(),mMovieData.getTitle()));
         Glide.with(getContext())
                 .load(AppConstants.IMAGEURL + mMovieData.getPoster_path())
                 .into(fragmentMovieBinding.ivPoster);
 
+    }
+
+    private View.OnClickListener getMoviePosterClick(String imgUrl,String movieName) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MovieWebActivity.class);
+                intent.putExtra(AppConstants.POSTER_URL, imgUrl);
+                intent.putExtra(AppConstants.MOVIE_NAME, movieName);
+                startActivity(intent);
+            }
+        };
     }
 
     private MovieDetailRequest getRequest() {

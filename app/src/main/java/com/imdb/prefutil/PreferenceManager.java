@@ -2,7 +2,7 @@ package com.imdb.prefutil;
 
 import android.app.Application;
 
-import com.imdb.ui.App;
+import com.imdb.ui.base.App;
 
 
 public class PreferenceManager {

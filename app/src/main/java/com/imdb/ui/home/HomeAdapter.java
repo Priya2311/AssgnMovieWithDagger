@@ -84,7 +84,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         ViewHolder(RowMovieListBinding binder) {
             super(binder.getRoot());
             this.rowMovieListBinding = binder;
-
         }
 
     }

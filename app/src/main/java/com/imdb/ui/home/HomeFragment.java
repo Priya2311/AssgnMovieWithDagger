@@ -12,17 +12,15 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.imdb.R;
 import com.imdb.api.ApiConstant;
 import com.imdb.databinding.FragmentHomeBinding;
-import com.imdb.ui.App;
+import com.imdb.ui.base.App;
 import com.imdb.ui.OnPosterClick;
 import com.imdb.ui.base.BaseFragment;
 import com.imdb.ui.moviedetail.MovieDetailActivity;
-import com.imdb.ui.web.MovieWebActivity;
 import com.imdb.utility.AppConstants;
 import com.imdb.utility.Lg;
 import com.imdb.vo.Resource;
@@ -41,20 +39,15 @@ public class HomeFragment extends BaseFragment implements OnPosterClick {
     @Inject
     HomeViewModel homeViewModel;
     private FragmentHomeBinding fragmentHomeBinding;
-    //private HomeViewModel homeViewModel;
     HomeAdapter mAdapter;
     private List<HomeResponse.ResultsBean> mMovieData = new ArrayList<HomeResponse.ResultsBean>();
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-        // Obtaining the login graph from LoginActivity and instantiate
+        // Obtaining the home graph from HomeActivity and instantiate
         // the @Inject fields with objects from the graph
         ((HomeActivity) getActivity()).homeComponent.inject(this);
-
-        // Now you can access loginViewModel here and onCreateView too
-        // (shared instance with the Activity and the other Fragment)
     }
 
     public HomeFragment() {
@@ -76,7 +69,6 @@ public class HomeFragment extends BaseFragment implements OnPosterClick {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         mAdapter = new HomeAdapter(getContext(), mMovieData);
         fragmentHomeBinding.movieRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         fragmentHomeBinding.movieRecycler.setAdapter(mAdapter);
@@ -138,9 +130,6 @@ public class HomeFragment extends BaseFragment implements OnPosterClick {
 
     @Override
     public void onPosterItemClick(int position) {
-//        Intent intent = new Intent(getContext(), MovieWebActivity.class);
-//        intent.putExtra(AppConstants.POSTER_URL, AppConstants.IMAGEURL + mMovieData.get(position).getPoster_path());
-//        startActivity(intent);
         Intent intent = new Intent(getContext(), MovieDetailActivity.class);
         intent.putExtra(ApiConstant.MOVIE_ID, mMovieData.get(position).getId());
         intent.putExtra(ApiConstant.MOVIE_DATA, (Serializable) mMovieData.get(position));

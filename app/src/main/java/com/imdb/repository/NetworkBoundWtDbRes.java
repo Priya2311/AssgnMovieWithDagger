@@ -24,8 +24,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.Observer;
 
-import com.imdb.AppExecutors;
 import com.imdb.api.ApiResponse;
+import com.imdb.di.AppExecutors;
 import com.imdb.utility.AbsentLiveData;
 import com.imdb.utility.ApiUtil;
 import com.imdb.utility.AppConstants;

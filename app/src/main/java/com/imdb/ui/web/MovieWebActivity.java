@@ -12,13 +12,17 @@ import com.imdb.utility.AppConstants;
 
 public class MovieWebActivity extends BaseActivity {
     private ActivityMovieWebBinding mWebBinding;
-    private String mImageUrl;
+    private String mImageUrl,mMovieName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mWebBinding = DataBindingUtil.setContentView(this, R.layout.activity_movie_web);
-        mWebBinding.toolbar.setTitle("Top Movie List");
+        if (getIntent().getExtras() != null) {
+            mImageUrl = getIntent().getExtras().getString(AppConstants.POSTER_URL);
+            mMovieName = getIntent().getExtras().getString(AppConstants.MOVIE_NAME);
+        }
+        mWebBinding.toolbar.setTitle(mMovieName);
         mWebBinding.toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar( mWebBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -31,9 +35,6 @@ public class MovieWebActivity extends BaseActivity {
             }
         });
 
-        if (getIntent().getExtras() != null) {
-            mImageUrl = getIntent().getExtras().getString(AppConstants.POSTER_URL);
-        }
         setFragment(WebFragment.newInstance(mImageUrl), false);
     }
 }

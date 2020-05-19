@@ -1,4 +1,4 @@
-package com.imdb.logout;
+package com.imdb.ui.logout;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

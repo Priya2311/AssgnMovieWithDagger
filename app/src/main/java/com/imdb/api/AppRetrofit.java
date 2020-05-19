@@ -24,6 +24,8 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+// This class will be responsible for api calling
+
 @Module
 public class AppRetrofit {
 
@@ -55,8 +57,7 @@ public class AppRetrofit {
     private AppService provideService() {
 
         // To show the Api Request & Params
-
-        OkHttpClient httpClient = getUnsafeOkHttpClient1();
+        OkHttpClient httpClient = getUnsafeOkHttpClient();
 
         return new Retrofit.Builder()
                 .baseUrl(ApiConstant.BASE_URL)
@@ -67,69 +68,14 @@ public class AppRetrofit {
                 .create(AppService.class);
     }
 
+
     private static OkHttpClient getUnsafeOkHttpClient() {
-        try {
-            Interceptor HEADER_INTERCEPTOR = new Interceptor() {
-                @Override
-                public Response intercept(Chain chain) throws IOException {
-                    Request.Builder builder = chain.request().newBuilder();
-                    // builder.addHeader(PrefConstants.JWT_TOKEN, PreferenceManager.get().getJwt());
-                    builder.addHeader("x-rapidapi-host", "devru-bigflix-movies-download-v1.p.rapidapi.com")
-                            .addHeader("x-rapidapi-key", AppConstants.APIKEY);
-                    Response response = chain.proceed(builder.build());
-
-                    if (isForbidden(response.code())) {
-                        Request newRequest = chain.request();
-                        newRequest = newRequest.newBuilder()
-                                .build();
-                        response = chain.proceed(newRequest);
-                    }
-                    return response;
-                }
-            };
-
-
-            //for logging
-            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(Lg.ISDEBUG ? HttpLoggingInterceptor.Level.HEADERS : HttpLoggingInterceptor.Level.NONE);
-            loggingInterceptor.setLevel(Lg.ISDEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
-
-            OkHttpClient.Builder builder = new OkHttpClient.Builder();
-            builder.addInterceptor(loggingInterceptor)
-                    .addInterceptor(HEADER_INTERCEPTOR)
-                    .connectTimeout(60, TimeUnit.SECONDS)
-                    .readTimeout(60, TimeUnit.SECONDS)
-                    .writeTimeout(60, TimeUnit.SECONDS);
-
-
-            OkHttpClient client = new OkHttpClient();
-            try {
-                client = new OkHttpClient.Builder()
-                        .sslSocketFactory(new TLSSocketFactory())
-                        .build();
-            } catch (KeyManagementException e) {
-                e.printStackTrace();
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-                return builder.build();
-            else return client;
-
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private static OkHttpClient getUnsafeOkHttpClient1() {
         try {
             Interceptor HEADER_INTERCEPTOR = new Interceptor() {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
 
                     Request.Builder builder = chain.request().newBuilder()
-                            // .addHeader(PrefConstants.JWT_TOKEN, PreferenceManager.get().getJwt());
                             .addHeader("x-rapidapi-host", "devru-bigflix-movies-download-v1.p.rapidapi.com")
                             .addHeader("x-rapidapi-key", AppConstants.APIKEY);
                     Response response = chain.proceed(builder.build());
@@ -137,7 +83,6 @@ public class AppRetrofit {
                     if (!response.isSuccessful() && isForbidden(response.code())) {
                         Request newRequest = chain.request();
                         newRequest = newRequest.newBuilder()
-                                // .addHeader(PrefConstants.JWT_TOKEN, PreferenceManager.get().getJwt())
                                 .build();
 
                         response = chain.proceed(newRequest);
@@ -149,11 +94,9 @@ public class AppRetrofit {
 
             //for logging
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-
             loggingInterceptor.setLevel(Lg.ISDEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
-
+            // creating builder object
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
-
             builder.addInterceptor(loggingInterceptor)
                     .addInterceptor(HEADER_INTERCEPTOR)
                     .connectTimeout(60, TimeUnit.SECONDS)
@@ -169,20 +112,20 @@ public class AppRetrofit {
         return code == HttpURLConnection.HTTP_FORBIDDEN;
     }
 
-    public AppService getAppService(Converter.Factory gsonConverter) {
-        // To show the Api Request & Params
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        httpClient.addInterceptor(logging);
-
-        return new Retrofit.Builder()
-                .baseUrl(ApiConstant.BASE_URL)
-                .addConverterFactory(gsonConverter)
-                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
-                .client(httpClient.build())
-                .build()
-                .create(AppService.class);
-    }
+//    public AppService getAppService(Converter.Factory gsonConverter) {
+//        // To show the Api Request & Params
+//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+//        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+//
+//        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+//        httpClient.addInterceptor(logging);
+//
+//        return new Retrofit.Builder()
+//                .baseUrl(ApiConstant.BASE_URL)
+//                .addConverterFactory(gsonConverter)
+//                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
+//                .client(httpClient.build())
+//                .build()
+//                .create(AppService.class);
+//    }
 }

@@ -20,11 +20,9 @@ public class HomeViewModel extends ViewModel {
     final MutableLiveData<HomeRequest> movieReq = new MutableLiveData<>();
     private LiveData<Resource<HomeResponse>> movieResp;
 
-    //private HomeRepositry homeRepositry;
-
+    // injected the home repositry
     @Inject
     public HomeViewModel(HomeRepositry homeRepositry) {
-       // homeRepositry = new HomeRepositry();
         movieResp = Transformations.switchMap(movieReq, new Function<HomeRequest, LiveData<Resource<HomeResponse>>>() {
             @Override
             public LiveData<Resource<HomeResponse>> apply(HomeRequest req) {
@@ -34,8 +32,6 @@ public class HomeViewModel extends ViewModel {
                     return homeRepositry.getMovies(req);
             }
         });
-
-
     }
 
 

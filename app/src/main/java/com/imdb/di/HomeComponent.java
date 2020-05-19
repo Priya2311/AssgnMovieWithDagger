@@ -1,4 +1,4 @@
-package com.imdb;
+package com.imdb.di;
 
 import com.imdb.ui.home.HomeActivity;
 import com.imdb.ui.home.HomeFragment;

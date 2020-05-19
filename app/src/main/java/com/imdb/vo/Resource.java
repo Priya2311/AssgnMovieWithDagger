@@ -95,14 +95,7 @@ public class Resource<T> {
         return result;
     }
 
-    /*  @Override
-      public String toString() {
-          return "Resource{" +
-                  "status=" + status +
-                  ", message='" + message + '\'' +
-                  ", data=" + data +
-                  '}';
-      }*/
+
     @Override
     public String toString() {
         return "Resource{" +

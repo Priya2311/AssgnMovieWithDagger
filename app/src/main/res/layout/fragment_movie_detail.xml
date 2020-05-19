@@ -7,75 +7,81 @@
         android:layout_height="match_parent"
         tools:context=".ui.moviedetail.MovieDetailFragment">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:fillViewport="true">
 
-            <ImageView
-                android:id="@+id/iv_poster"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp320"
-                android:scaleType="centerCrop" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_movie_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp12"
-                android:paddingLeft="@dimen/dp12"
-                android:paddingTop="@dimen/dp10"
-                android:paddingRight="@dimen/dp12"
-                android:paddingBottom="@dimen/dp2"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size_15sp" />
+                <ImageView
+                    android:id="@+id/iv_poster"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp320"
+                    android:scaleType="centerCrop" />
 
-            <TextView
-                android:id="@+id/tv_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/dp12"
-                android:paddingTop="@dimen/dp10"
-                android:paddingRight="@dimen/dp12"
-                android:paddingBottom="@dimen/dp2"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size_15sp" />
+                <TextView
+                    android:id="@+id/tv_movie_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:paddingLeft="@dimen/dp12"
+                    android:paddingTop="@dimen/dp10"
+                    android:paddingRight="@dimen/dp12"
+                    android:paddingBottom="@dimen/dp2"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_15sp" />
 
-            <TextView
-                android:id="@+id/tv_release_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/dp12"
-                android:paddingTop="@dimen/dp10"
-                android:paddingRight="@dimen/dp12"
-                android:paddingBottom="@dimen/dp2"
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp12"
+                    android:paddingTop="@dimen/dp10"
+                    android:paddingRight="@dimen/dp12"
+                    android:paddingBottom="@dimen/dp2"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_15sp" />
 
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size_15sp" />
+                <TextView
+                    android:id="@+id/tv_release_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp12"
+                    android:paddingTop="@dimen/dp10"
+                    android:paddingRight="@dimen/dp12"
+                    android:paddingBottom="@dimen/dp2"
 
-            <TextView
-                android:id="@+id/tv_vote_count"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/dp12"
-                android:paddingTop="@dimen/dp10"
-                android:paddingRight="@dimen/dp12"
-                android:paddingBottom="@dimen/dp2"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_15sp" />
 
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size_15sp" />
+                <TextView
+                    android:id="@+id/tv_vote_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp12"
+                    android:paddingTop="@dimen/dp10"
+                    android:paddingRight="@dimen/dp12"
+                    android:paddingBottom="@dimen/dp2"
 
-            <TextView
-                android:id="@+id/tv_overview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/dp12"
-                android:paddingTop="@dimen/dp10"
-                android:paddingRight="@dimen/dp12"
-                android:paddingBottom="@dimen/dp2"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/text_size_15sp" />
-        </LinearLayout>
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+
+                <TextView
+                    android:id="@+id/tv_overview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp12"
+                    android:paddingTop="@dimen/dp10"
+                    android:paddingRight="@dimen/dp12"
+                    android:paddingBottom="@dimen/dp2"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+            </LinearLayout>
+        </ScrollView>
 
         <TextView
             android:id="@+id/tv_watermark"

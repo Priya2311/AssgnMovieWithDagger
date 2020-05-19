@@ -1,4 +1,4 @@
-package com.imdb.ui;
+package com.imdb.ui.base;
 
 import android.app.Application;
 import android.content.BroadcastReceiver;
@@ -8,10 +8,10 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.view.View;
 
-import com.imdb.AppComponent;
-import com.imdb.AppModule;
-import com.imdb.DaggerAppComponent;
 import com.imdb.api.AppRetrofit;
+import com.imdb.di.AppComponent;
+import com.imdb.di.AppModule;
+import com.imdb.di.DaggerAppComponent;
 import com.imdb.utility.AppUtils;
 import com.imdb.utility.DialogUtil;
 import com.imdb.utility.Lg;
@@ -37,7 +37,7 @@ public class App extends Application {
         mAppInstance = this;
         mAppComponent = DaggerAppComponent.builder()
                 // list of modules that are part of this component need to be created here too
-                .appModule(new AppModule(this)) // This also corresponds to the name of your module: %component_name%Module
+                .appModule(new AppModule(this))
                 .appRetrofit(new AppRetrofit())
                 .build();
     }

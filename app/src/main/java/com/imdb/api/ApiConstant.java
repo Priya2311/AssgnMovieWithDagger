@@ -1,6 +1,6 @@
 package com.imdb.api;
 
-
+// This class has api constants and intent keys
 public class ApiConstant {
     // base url
     public static final String BASE_URL = "https://api.themoviedb.org/3/";

@@ -27,11 +27,11 @@ public class MovieDetailActivity extends BaseActivity {
         mMovieData = (HomeResponse.ResultsBean) getIntent().getSerializableExtra(ApiConstant.MOVIE_DATA);
         setSupportActionBar(mMovieBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setDisplayShowHomeEnabled(true);
         mMovieBinding.toolbar.setTitle(mMovieData.getTitle());
         mMovieBinding.toolbar.setTitleTextColor(Color.WHITE);
         mMovieBinding.toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24px);
         mMovieBinding.toolbar.setNavigationOnClickListener(getNavigationClick());
+        // at first passed the movie id (which is actually the record id) but now passing the movie data
         setFragment(MovieDetailFragment.newInstance(mMovieId,mMovieData), false);
     }
 

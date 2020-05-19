@@ -1,4 +1,4 @@
-package com.imdb;
+package com.imdb.di;
 
 import android.app.Application;
 
